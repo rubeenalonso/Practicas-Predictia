@@ -38,7 +38,7 @@ def plot_ts():
     print("Media de Precipitación 1990:", mean_precipitation2.values)
     print("Desviacion Estándar de Precipitación 1990:", std_dev_precipitation2.values)
 
-
+    print("Modificación de prueba")
 
 
 if __name__ == '__main__':
