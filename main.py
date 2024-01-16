@@ -9,19 +9,19 @@ def plot_ts():
 
     ds2 = xr.open_dataset('/home/alonsor/data/reanalysis/era5/pr/None/pr_None_era5_199001_025deg.nc')
 
-    # Seleccionar datos para una ubicación específica (por ejemplo, primera latitud y longitud)
-    subset = ds['pr'].isel(lat=0, lon=0)
-    subset2 = ds2['pr'].isel(lat=0, lon=0)
+    # Seleccionar datos para una ubicación específica (por ejemplo, Santander)
+    subset = ds['pr'].isel(lat=43, lon=-4)
+    subset2 = ds2['pr'].isel(lat=43, lon=-4)
 
     # Crear gráficos
     fig1 = plt.figure()
     subset.plot()
-    plt.title('Precipitación Febrero 1980')
+    plt.title('Precipitación Santander Febrero 1980')
     plt.show()
 
     fig2 = plt.figure()
     subset2.plot()
-    plt.title('Precipitación Febrero 1990')
+    plt.title('Precipitación Santander Febrero 1990')
     plt.show()
 
     # Calcular estadísticas
