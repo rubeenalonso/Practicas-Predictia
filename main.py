@@ -1,8 +1,7 @@
-
+import pandas
 import xarray as xr
 import matplotlib.pyplot as plt
-
-
+import pandas as pd
 def plot_ts():
     # Abrir el conjunto de datos
     ds = xr.open_dataset('/home/alonsor/data/reanalysis/era5/pr/None/pr_None_era5_198001_025deg.nc')
@@ -10,40 +9,31 @@ def plot_ts():
     ds2 = xr.open_dataset('/home/alonsor/data/reanalysis/era5/pr/None/pr_None_era5_199001_025deg.nc')
 
     # Seleccionar datos para una ubicación específica (por ejemplo, Santander)
-    subset = ds['pr'].isel(lat=43, lon=-4)
-    subset2 = ds2['pr'].isel(lat=43, lon=-4)
+    subset = ds['pr'].sel(lat=43, lon=-4, method="nearest")
+    subset2 = ds2['pr'].sel(lat=43, lon=-4, method="nearest")
 
-    # Crear gráficos
-    fig1 = plt.figure()
-    subset.plot()
-    plt.title('Precipitación Santander Febrero 1980')
+    subset["time"] = pd.to_datetime(subset["time"].values) - pd.Timedelta(hours=1)
+    subset2["time"] = pd.to_datetime(subset2["time"].values) - pd.Timedelta(hours=1)
+
+    # Pasar los datos de horario a diario
+    subset_diario = subset.resample(time="1D").sum()
+    subset2_diario = subset2.resample(time="1D").sum()
+
+    # Plot de los resultados
+    plt.figure()
+    subset_diario.plot()
     plt.show()
 
-    fig2 = plt.figure()
-    subset2.plot()
-    plt.title('Precipitación Santander Febrero 1990')
+    plt.figure()
+    subset2_diario.plot()
     plt.show()
 
-    # Calcular estadísticas
-    mean_precipitation = subset.mean(dim='time')
-    std_dev_precipitation = subset.std(dim='time')
+    # Calcular la acumulación acumulativa con cumsum()
+    cumulative_subset = subset_diario.cumsum()
+    cumulative_subset2 = subset2_diario.cumsum()
 
-    mean_precipitation2 = subset2.mean(dim='time')
-    std_dev_precipitation2 = subset2.std(dim='time')
-
-    # Imprimir estadísticas
-    print("Media de Precipitación 1980:", mean_precipitation.values)
-    print("Desviación Estándar de Precipitación 1980:", std_dev_precipitation.values)
-
-    print("Media de Precipitación 1990:", mean_precipitation2.values)
-    print("Desviacion Estándar de Precipitación 1990:", std_dev_precipitation2.values)
-
-    print("Modificación de prueba")
-
-
-if __name__ == '__main__':
-    plot_ts()
-
-
-
-
+    # Graficar las series acumulativas
+    cumulative_subset.plot()
+    plt.show()
+    cumulative_subset2.plot()
+    plt.show()
