@@ -22,10 +22,12 @@ def plot_ts():
     # Plot de los resultados
     plt.figure()
     subset_diario.plot()
+    plt.title("Precipitación Santander Febrero 1980")
     plt.show()
 
     plt.figure()
     subset2_diario.plot()
+    plt.title("Precipitación Santander Febrero 1990")
     plt.show()
 
     # Calcular la acumulación acumulativa con cumsum()
@@ -33,7 +35,14 @@ def plot_ts():
     cumulative_subset2 = subset2_diario.cumsum()
 
     # Graficar las series acumulativas
-    cumulative_subset.plot()
+    cumulative_subset.plot(color='red')
+    plt.title("Precipitación acumulada Santander Febrero 1980")
     plt.show()
-    cumulative_subset2.plot()
+    cumulative_subset2.plot(color='red')
+    plt.title("Precipitación acumulada Santander Febrero 1990")
     plt.show()
+
+
+if __name__ == '__main__':
+    plot_ts()
+
