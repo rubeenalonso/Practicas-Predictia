@@ -12,6 +12,7 @@ def plot_ts():
     subset = ds['pr'].sel(lat=43, lon=-4, method="nearest")
     subset2 = ds2['pr'].sel(lat=43, lon=-4, method="nearest")
 
+    # El dato de las 23.00 a 23.59 del día A se guarda como el primer dato del día B. Esto hay que modificarlo
     subset["time"] = pd.to_datetime(subset["time"].values) - pd.Timedelta(hours=1)
     subset2["time"] = pd.to_datetime(subset2["time"].values) - pd.Timedelta(hours=1)
 
