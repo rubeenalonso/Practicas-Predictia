@@ -83,4 +83,29 @@ cumulative_subset_V.plot(color='red')
 plt.title("Precipitación acumulada Vigo Enero 2020")
 plt.show()
 
+# Se pinta en el mismo plot la precipitación de las 4 ciudades cada una de un color
+
+plt.figure()
+subset_S_diario.plot(color='red')
+subset_A_diario.plot(color='blue')
+subset_M_diario.plot(color='green')
+subset_V_diario.plot(color='black')
+plt.title("Precipitación diaria Enero 2020")
+legend = ["Santander", "Alicante", "Madrid", "Vigo"]
+plt.legend(legend)
+plt.show()
+
+# Se pinta en el mismo plot la precipitación acumulada de las 4 ciudades cada una de un color
+
+plt.figure()
+cumulative_subset_S.plot(color='red')
+cumulative_subset_A.plot(color='blue')
+cumulative_subset_M.plot(color='green')
+cumulative_subset_V.plot(color='black')
+plt.title("Precipitación acumulada Enero 2020")
+legend = ["Santander", "Alicante", "Madrid", "Vigo"]
+plt.legend(legend)
+plt.show()
+
+
 
