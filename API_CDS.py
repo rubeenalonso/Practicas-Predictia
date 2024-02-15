@@ -9,7 +9,7 @@ c.retrieve(
     {
         'format': 'netcdf',
         'product_type': 'monthly_averaged_reanalysis',
-        'variable': 'skin_temperature',
+        'variable': '2m_temperature',
         'year': [
             '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989',
             '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999',
